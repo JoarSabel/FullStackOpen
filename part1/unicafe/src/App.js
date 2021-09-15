@@ -4,24 +4,37 @@ import React, { useState } from 'react'
 
 const DisplayHeader = ({text}) => <h1>{text}</h1>
 
+const StatisticsLine = (props) => {
+return(
+<tr>
+  <td>{props.name}</td> 
+  <td>{props.value}</td>
+</tr>
+)
+}
+
+
 const Statistics = (props) => {
   const total = props.good + props.neutral + props.bad
-  if (total == 0) {
+  if (total === 0) {
     return(
       <div>No feedback given</div>
     )
   }
-  const positive = props.good/total * 100
+  const positive = props.good/total * 100 + "%"
   const average = (props.good - props.bad)/total
   return(
-    <div>
-      <p>good {props.good}</p>
-      <p>neutral {props.neutral}</p>
-      <p>bad {props.bad}</p>
-      <p>all {total}</p>
-      <p>average {average}</p>
-      <p>positive {positive}%</p>
-    </div>
+    <table>
+      <tbody>
+      <StatisticsLine name = "good" value = {props.good}/>
+      <StatisticsLine name = "neutral" value = {props.neutral}/>
+      <StatisticsLine name = "bad" value = {props.bad}/>
+      <StatisticsLine name = "all" value = {total}/>
+      <StatisticsLine name = "average" value = {average}/>
+      <StatisticsLine name = "positive" value = {positive}/>
+      </tbody>
+    </table>
+  
 )
 }
 const Button = (props) => {
